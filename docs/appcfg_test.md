@@ -11,21 +11,24 @@ input. Inputs mainly come in the form of template data attributes and output
 is either validated against expected plain text or JSON files.
 
 Each template type supports a set of template data attributes and these attributes
-can be configured via JSON files. Each file is named after it's corresponding attribute
-name and has a ".json" extension. E.g. the "customer" attribute for data pull templates
-is configured in a "customer.json" file.
+can be configured via JSON files. Each file is named after it's corresponding
+attribute name and has a ".json" extension. E.g. the "customer" attribute for
+data pull templates is configured in a "customer.json" file.
 
-Test data for action and data pull configuration is located in a "_test_" sub folder of
-each configuration. Test configuration data is located in the "_test_/data" folder and
-test output will be written to the "_test_/output" folder (when output is directed to a file).
+Test related files for action and data pull configuration is located in a
+"_test_" sub folder of each configuration. Test configuration data is located
+in the "_test_/data" folder and test output will be written to the "_test_/output"
+folder when output is directed to a file.
 
-Expected text and JSON files for validation follow the naming convention of "expected_"
-with a suffix of the template file who's output is being validated. E.g. a
-"request_url.gtpl" file will have a validation file named "expected_request_url.txt".
-The file extension depends on the expected output format of the corresponding template.
-For example, response transformation template files ("response_transformation.gtpl")
-will have a validation file named "expected_response_transformation.json" since these
-templates MUST generate JSON output.
+Files used for validating test output have a prefix of "expected_" followed by
+the name of the template file who's output is being validated. E.g. a "request_url.gtpl"
+file will have an output validation file named "expected_request_url.txt". The
+file extension depends on the expected output format of the corresponding
+template.
+
+For example, a "response_transformation.gtpl" template file  will have a validation
+file named "expected_response_transformation.json" since these templates MUST 
+generate JSON output.
 
 Expected JSON output uses a data comparison whereas expected plain text output
 will either perform an exact string comparison or use a regular expression. Expected
@@ -35,35 +38,24 @@ the text content of the file with a leading and trailing slash "/" character.
 A test for a given template will create the template data from the ".json" attribute
 files and compare the template result to the corresponding expected output file.
 
-The "add" command for each configuration will create stubs for all relevant test files
-in the configuration's corresponding "_test_/data" folder. These are considered
-the "default" test files for this configuration.
+The "add" command for each configuration will create test stub files for the
+relevant template data attributes in the "_test_/data" folder and "expected_*.*"
+validation files in the "_test_/data/success" dataset folder. Tests are organized
+via datasets which are comprised of template data attribute files and expected
+template output files. The default test dataset created by the "add" command is
+for testing successful template transformations.
 
-For more complex templates it is possible to create multiple test scenarios by
-creating different sets of template data attribute files with corresponding validation
-files. This is accomplished by creating sub folders under the "_test_/data" folder,
-where each folder contains the relevant JSON template attribute files and corresponding
-expected output files. These folders are referenced via the --data-set flag when
-running a given test. Simply create a sub folder with a name reflecting what
-is being tested and copy the "default" test files from the "_test_/data" directory
-in to the sub folder. Make relevant changes to the JSON files as well as expected
-output files for the scenario being tested. You can create as many test dataset
-folders as needed.
+Test datasets live in sub folders under the "_test_/data" folder, where each
+folder contains the relevant JSON template attribute files and corresponding
+expected output files for a given test scenario. The dataset folder name should
+provide a brief description of what is being tested. Datasets are referenced
+via the --data-set command line flag when running tests. Omitting the --data-set
+flag will test all datasets for a given configuration. You can create as many
+test dataset folders as needed.
 
-Test datasets take precedence over the "default" test files in the "_test_/data"
-folder. Only test datasets are run once a test dataset has been created. Omitting
-the --data-set flag when datasets are present will test all datasets.
-
-Once you have created a test dataset, the "expected_*.txt" and "expected_*.json" files
-in the "_test_/data" folder will no longer be used for testing but can be used as a
-starting point for creating new test datasets. The template data attribute JSON
-files in the "_test_/data" folder on the other hand can be used as defaults
-when a given test dataset does not require modifying a given template data attribute.
-For example, you may have a template that references the "correlationId" template
-data attribute but there is no need to change this value for any test scenarios. If
-a given test dataset sub folder does not include a "correlationId.json" file then
-the test will use the "correlationId.json" file from the "_test_/data" folder. This
-holds true for any template data attribute JSON file.
+The template data attribute files in the "_test_/data" folder serve as defaults
+for all test datasets. Simply create a template data attribute file in a dataset
+folder to override the default when unique values are required for the given test.
 
 Conditions in your templates that trigger calling the "stop" or "fail" functions can
 be tested by including the text from the corresponding "stop" and "fail" in the
@@ -78,7 +70,7 @@ e.g. to verify the following condition
 just include the text "the request did not return any data" (including the double
 quotes) in the corresponding "expected_response_transformation.json" file.
 
-For more information regarding the "stop" and "fail" (sprig) functions see
+For more information regarding the "stop" and "fail" (sprig) functions run
 "appcfg platform template-functions".
 
 
@@ -113,4 +105,4 @@ appcfg test [action | action-header | auth-header | data-pull | data-pull-header
 * [appcfg test oauth-header](appcfg_test_oauth-header.md)	 - Test an individual or all OAuth header configurations
 * [appcfg test signing-header](appcfg_test_signing-header.md)	 - Test an individual or all request signing header configurations
 
-###### Auto generated by spf13/cobra on 22-Apr-2024
+###### Auto generated by spf13/cobra on 10-May-2024
