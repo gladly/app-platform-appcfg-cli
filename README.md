@@ -38,7 +38,8 @@ from the [Releases](https://github.com/gladly/app-platform-appcfg/releases) sect
 ## Enabling Auto Completion
 
 Make sure that you have auto complete enabled for your shell and then run the
-following from the command line.
+following from the command line. Auto complete requires that the `GLADLY_APP_CFG_ROOT` environment 
+variable is set for the app that you are currently developing.
 
 ### zsh
 
