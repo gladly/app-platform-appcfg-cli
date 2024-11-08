@@ -35,6 +35,15 @@ from the [Releases](https://github.com/gladly/app-platform-appcfg/releases) sect
 | Windows 64 bit Intel | appcfg-{version number}-win.zip |
 | Linux 64 bit Intel | appcfg-{version number}-linux-intel.zip |
 
+Once downloaded, open the zipped file, and place the executable appcfg in `~/.local/bin/`.
+
+If this is your first time installing the appcfg tool: 
+- Add `alias appcfg=~/.local/bin/appcfg` to `.zsrch` or your shell profile.
+- In your terminal, run `sudo chmod a+x ~/.local/bin/appcfg`.
+- In your terminal, run `appcfg` -- This may fail with an error indicating the executable is from an unidentified developer. In System Settings -> Privacy & Security, approve the external app, and run `appcfg` again to confirm.
+
+Run `appcfg -h` to see the CLI help options.
+
 ## Enabling Auto Completion
 
 Make sure that you have auto complete enabled for your shell and then run the
