@@ -1,19 +1,31 @@
-## appcfg apps info
+## appcfg apps completion-env
 
-Display detailed information about an application
+Create the environment variables needed for auto completion of the various "appcfg apps ..." commands.
 
 ### Synopsis
 
-Display detailed information about a specified application by its identifier.
+Use the output of this command to set the environment variables needed for 
+auto completion for the various 'appcfg apps ...' commands.
+
+"appcfg apps ..." commands required the following environment variables to be set in order for auto 
+completion to work:
+  - GLADLY_APP_CFG_USER
+  - GLADLY_APP_CFG_TOKEN
+  - GLADLY_APP_CFG_HOST
+
+e.g. use the following to set the environment variables in ZSH on Mac OS X:
+
+source <(appcfg apps completion-env zsh -u {Gladly API user email} -t {Gladly API token} -g {Gladly host})
+
 
 ```
-appcfg apps info {application identifier} [flags]
+appcfg apps completion-env {bash | fish | powershell | zsh} [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help           help for info
+  -h, --help           help for completion-env
   -t, --token string   API token for Gladly user; alternatively set the GLADLY_APP_CFG_TOKEN environment variable
   -u, --user string    Gladly user email associated with the API token; alternatively set the GLADLY_APP_CFG_USER environment variable
 ```
