@@ -131,7 +131,7 @@ function Add-ToPath {
         try {
             $newPath = "$currentPath;$InstallDir"
             [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
-            Write-Success "Added to PATH. Restart your terminal or run: refreshenv"
+            Write-Success "Added to PATH."
         }
         catch {
             Write-Warning "Failed to add to PATH automatically"
@@ -167,7 +167,6 @@ function Install-Completions {
                 if ($profileContent -notlike "*$completionFile*") {
                     Add-Content -Path $PROFILE -Value "`n# appcfg completions`n$sourceCommand"
                     Write-Success "PowerShell completions installed and added to profile"
-                    Write-Info "Restart PowerShell to enable completions"
                 }
                 else {
                     Write-Success "PowerShell completions updated"
@@ -208,7 +207,12 @@ function Main {
     
     Write-Success "Installation complete!"
     Write-Info "Run 'appcfg --help' to get started."
-    Write-Info "You may need to restart your terminal for PATH changes to take effect."
+    
+    # Check if PATH was modified and provide guidance
+    $currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
+    if ($currentPath -like "*$InstallDir*") {
+        Write-Info "Note: If 'appcfg' command is not found, restart your terminal to refresh the PATH."
+    }
 }
 
 # Handle script interruption
