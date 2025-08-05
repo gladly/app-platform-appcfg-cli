@@ -23,10 +23,14 @@ Linux Kernel version 2.6.32 or later (64 bit Intel)
 
 ### Quick Install (Recommended)
 
-Install `appcfg` by running this command:
-
+**macOS/Linux:**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/gladly/app-platform-appcfg-cli/main/install.sh | bash
+```
+
+**Windows (PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/gladly/app-platform-appcfg-cli/main/install.ps1 | iex
 ```
 
 ### Manual Installation

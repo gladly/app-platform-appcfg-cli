@@ -46,7 +46,6 @@ log_error() {
 detect_platform() {
     local platform
     local arch
-    local binary_suffix=""
 
     # Detect OS
     case "$(uname -s)" in
@@ -56,12 +55,8 @@ detect_platform() {
         Linux*)
             platform="linux"
             ;;
-        CYGWIN*|MINGW*|MSYS*)
-            platform="win"
-            binary_suffix=".exe"
-            ;;
         *)
-            log_error "Unsupported operating system: $(uname -s)"
+            log_error "Unsupported operating system: $(uname -s). For Windows, use the PowerShell script instead."
             exit 1
             ;;
     esac
@@ -89,7 +84,6 @@ detect_platform() {
         PLATFORM_STRING="${platform}"
     fi
 
-    BINARY_SUFFIX="$binary_suffix"
     
     log_info "Detected platform: $PLATFORM_STRING"
 }
@@ -152,8 +146,8 @@ download_and_install() {
     fi
     
     # Move binary to install directory
-    local binary_path="${temp_dir}/${BINARY_NAME}${BINARY_SUFFIX}"
-    local install_path="${INSTALL_DIR}/${BINARY_NAME}${BINARY_SUFFIX}"
+    local binary_path="${temp_dir}/${BINARY_NAME}"
+    local install_path="${INSTALL_DIR}/${BINARY_NAME}"
     
     if [[ ! -f "$binary_path" ]]; then
         log_error "Binary not found in archive: $binary_path"
@@ -182,7 +176,7 @@ check_path() {
 
 # Install shell completions
 install_completions() {
-    local binary_path="${INSTALL_DIR}/${BINARY_NAME}${BINARY_SUFFIX}"
+    local binary_path="${INSTALL_DIR}/${BINARY_NAME}"
     
     # Detect shell
     local shell_name
@@ -258,7 +252,7 @@ install_completions() {
 
 # Verify installation
 verify_installation() {
-    local binary_path="${INSTALL_DIR}/${BINARY_NAME}${BINARY_SUFFIX}"
+    local binary_path="${INSTALL_DIR}/${BINARY_NAME}"
     
     if [[ -x "$binary_path" ]]; then
         log_info "Verifying installation..."
