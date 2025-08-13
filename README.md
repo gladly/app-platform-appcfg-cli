@@ -21,6 +21,20 @@ Linux Kernel version 2.6.32 or later (64 bit Intel)
 
 ## Installation
 
+### Quick Install (Recommended)
+
+**macOS/Linux:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/gladly/app-platform-appcfg-cli/main/install.sh | bash
+```
+
+**Windows (PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/gladly/app-platform-appcfg-cli/main/install.ps1 | iex
+```
+
+### Manual Installation
+
 Note that the executables are currently not signed and will trigger a security
 warning the first time you run the tool. You will need to update security settings
 relevant for your operating system in order to allow the tool to run.
