@@ -1,20 +1,19 @@
-## appcfg apps config list
+## appcfg apps config display
 
-List installed configurations
+Display an app's configuration and secrets structure
 
 ### Synopsis
 
-List all configurations or those for a specific application in your Gladly environment.
+Display the structure of the configuration and secrets objects for an installed application.
 
 ```
-appcfg apps config list [flags]
+appcfg apps config display {application identifier} [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help                help for list
-  -i, --identifier string   filter configurations by application identifier
+  -h, --help   help for display
 ```
 
 ### Options inherited from parent commands
