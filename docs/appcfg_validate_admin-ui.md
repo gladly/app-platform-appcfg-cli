@@ -1,15 +1,15 @@
-## appcfg validate actions
+## appcfg validate admin-ui
 
-Validate all action configurations
+Validate the admin UI form configuration
 
 ```
-appcfg validate actions [flags]
+appcfg validate admin-ui [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for actions
+  -h, --help   help for admin-ui
 ```
 
 ### Options inherited from parent commands
